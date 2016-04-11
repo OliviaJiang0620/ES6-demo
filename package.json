@@ -1,0 +1,11 @@
+{
+	"devDependencies": {
+		"babel-cli": "^6.0.0"
+	},
+	"script": {
+		"build": "babel src -s lib"
+	},
+	"browserify": {
+		"transform": [["babelify", {"presets": ["es2015"] }]]
+	}
+}
