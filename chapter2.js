@@ -28,7 +28,74 @@ var { foo: baz } = { foo: "aaa"};
 let obj = {first: "hello", last: "world"};
 let {first: f, last: l} = obj; // f: hello l: world
 
+var obj = {
+	p: [
+		"hello",
+		{y: "world"}
+	]
+};
+var { p: [x, {y}]} = obj;
+x //"Hello"
+y //"World"
+//p是模式, 不是变量
 
+var node = {
+	loc: {
+		start: {
+			line: 1,
+			culunm:5
+		}
+	}
+};
+var  {loc: { start: { line }} } = node;
+//line 1
+//loc: error loc is undefined
+//start: error: start is undefined
 
+let obj = {};
+let arr= [];
+({ foo: obj.prop, bar:arr[0] } = { foo: 123, bar:true});
+//obj: prop:123
+//arr [true]
 
+var {x = 3} = {};//x 3
+var {x, y=5} = {x: 1}; //x 1 y 5
+var {message: msg= "Something went wrong" } = {}; //msg "Something went wrong"
+var {x = 3} = {x : undefined}; //x=3
+var {x = 3} = {x: null } //x null
+let { log, sin, cos} = Math;
 
+const [a, b, c, d, e] ="hello";
+let {length : len} ='hello';
+
+let {toString: s} = 123;
+s === Number.prototype.toString//true
+
+let {toString: s} = true;
+s === Boolean.prototype.toString//true
+
+function add([x, y]){
+	return x+y;
+}
+add([1, 2])
+
+[[1, 2], [3, 4]].map(([a, b]) => a +  b) //[3, 7]
+
+function move({x=0, y=0} = {}){
+	return [x,y];
+}
+move({x:3, y:8});//[3,8]
+move({x:3});//[3,0]
+move({}); //[0,0]
+move();//[0,0]
+
+function move1({x, y} = {x: 0, y: 0}){
+	return [x,y];
+}
+
+move({x:3, y:8});//[3,8]
+move({x:3});//[3, undefined]
+move({}); //[undefined, undefined]
+move(); //[0,0]
+
+[1, undefined, 3].map((x = 'yes') =>x) // [1, 'yes', 3]
